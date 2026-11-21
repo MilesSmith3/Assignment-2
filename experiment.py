@@ -1,7 +1,7 @@
 # experiment.py
 # Run time trials of searching algorithms
 # Starter Code from CSC 210
-# Modified by: [Your Name]
+# Modified by: [Miles Smith
 
 from random import randint
 from search import linear_search, binary_search
@@ -11,7 +11,7 @@ from time import perf_counter_ns
 # every integer between *min_value* and *max_value*
 # of length, *length*
 def random_int_list(length, min_value, max_value):
-
+    # List comprehension: one random integer per position, O(length)
     return [randint(min_value, max_value) for _ in range(length)]
     
 # Conduct *num_trials* number of trials of linear and
@@ -36,20 +36,23 @@ def random_int_list(length, min_value, max_value):
 def time_trial(num_trials, data_size, min_value, max_value):
     data = random_int_list(data_size, min_value, max_value)
 
+    # Linear search on the unsorted list
     linear_time = 0
     for _ in range(num_trials):
-        key = randint(min_value, max_value) 
+        key = randint(min_value, max_value)  # new search key each time
         start_time = perf_counter_ns()
         linear_search(data, key)
         end_time = perf_counter_ns()
         linear_time += (end_time - start_time)
 
+    # Sort a copy once (the original stays unsorted), and time the sort
     sorted_data = data.copy()
     start_time = perf_counter_ns()
     sorted_data.sort()
     end_time = perf_counter_ns()
-    binary_time = end_time - start_time  
+    binary_time = end_time - start_time  # amortized below by dividing by num_trials
 
+    # Binary search on the sorted copy
     for _ in range(num_trials):
         key = randint(min_value, max_value)
         start_time = perf_counter_ns()
@@ -57,4 +60,5 @@ def time_trial(num_trials, data_size, min_value, max_value):
         end_time = perf_counter_ns()
         binary_time += (end_time - start_time)
 
+    # Average time per search, as (linear, binary)
     return (linear_time / num_trials, binary_time / num_trials)
