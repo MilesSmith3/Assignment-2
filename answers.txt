@@ -1,3 +1,5 @@
+Miles Smith
+
 1. random_int_list() is O(n), where n is the length argument.
 It makes n calls to randint(), and each call takes constant time, so the
 total work grows linearly with n.
