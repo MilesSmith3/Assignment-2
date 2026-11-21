@@ -6,12 +6,11 @@
 # This version of linear search looks for
 # *key* in *lst* and returns a boolean (True or False)
 # depending on if it found it
-def linear_search(lst, key):
+def linear_search(lst, key): 
     for item in lst:
         if item == key:
-            return true
-    return false
-    pass
+            return True
+    return False
 
 # This version of binary search looks for
 # *key* in *lst* and returns a boolean (True or False)
@@ -22,10 +21,11 @@ def binary_search(data, key):
 
     while low <= high:
         mid = (low + high) // 2
-        if data[mid] < key:
-            low = mid + 1
+        if data[mid] == key:
+            return True
         elif data[mid] < key:
-            low = mid + 1 
+            low = mid + 1
         else:
-            high = mid + 1
+            high = mid - 1
+
     return False
