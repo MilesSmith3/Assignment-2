@@ -29,3 +29,4 @@ def binary_search(data, key):
             high = mid - 1
 
     return False
+    
